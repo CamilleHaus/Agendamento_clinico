@@ -1,0 +1,77 @@
+import { Professional } from '../professionals/professional.entity.js';
+import { Patient } from '../patients/patient.entity.js';
+import { Appointment } from '../appointments/appointment.entity.js';
+
+// Dados fictícios. Os horários das consultas estão em UTC (ISO 8601).
+
+export const professionals: Professional[] = [
+  { id: 'pro-1', name: 'Dra. Ana Lima', specialty: 'Clínica geral', workStart: '08:00', workEnd: '17:00', slotMinutes: 30 },
+  { id: 'pro-2', name: 'Dr. Bruno Costa', specialty: 'Pediatria', workStart: '09:00', workEnd: '15:00', slotMinutes: 20 },
+  { id: 'pro-3', name: 'Dra. Carla Mendes', specialty: 'Dermatologia', workStart: '13:00', workEnd: '19:00', slotMinutes: 40 },
+];
+
+export const patients: Patient[] = [
+  { id: 'pat-1', name: 'João Pereira', phone: '(21) 90000-0001', birthDate: '1985-03-10' },
+  { id: 'pat-2', name: 'Mariana Souza', phone: '(21) 90000-0002', birthDate: '1992-07-22' },
+  { id: 'pat-3', name: 'Pedro Alves', phone: '(21) 90000-0003', birthDate: '2016-11-02' },
+  { id: 'pat-4', name: 'Luciana Ferreira', phone: '(21) 90000-0004', birthDate: '1978-01-15' },
+  { id: 'pat-5', name: 'Rafael Gomes', phone: '(21) 90000-0005', birthDate: '1990-09-30' },
+  { id: 'pat-6', name: 'Beatriz Santos', phone: '(21) 90000-0006', birthDate: '2019-04-08' },
+  { id: 'pat-7', name: 'Carlos Eduardo Rocha', phone: '(21) 90000-0007', birthDate: '1965-12-03' },
+  { id: 'pat-8', name: 'Fernanda Oliveira', phone: '(21) 90000-0008', birthDate: '1988-06-19' },
+  { id: 'pat-9', name: 'Gustavo Martins', phone: '(21) 90000-0009', birthDate: '1973-02-27' },
+  { id: 'pat-10', name: 'Helena Ribeiro', phone: '(21) 90000-0010', birthDate: '2014-08-11' },
+  { id: 'pat-11', name: 'Isabela Carvalho', phone: '(21) 90000-0011', birthDate: '1995-10-05' },
+  { id: 'pat-12', name: 'Marcos Vinícius Teixeira', phone: '(21) 90000-0012', birthDate: '1959-05-21' },
+  { id: 'pat-13', name: 'Juliana Barbosa', phone: '(21) 90000-0013', birthDate: '1983-11-14' },
+  { id: 'pat-14', name: 'Lucas Nascimento', phone: '(21) 90000-0014', birthDate: '2020-02-29' },
+  { id: 'pat-15', name: 'Patrícia Moreira', phone: '(21) 90000-0015', birthDate: '1970-07-07' },
+  { id: 'pat-16', name: 'Ricardo Cardoso', phone: '(21) 90000-0016', birthDate: '1999-03-23' },
+  { id: 'pat-17', name: 'Sofia Araújo', phone: '(21) 90000-0017', birthDate: '2001-12-12' },
+  { id: 'pat-18', name: 'Thiago Lopes', phone: '(21) 90000-0018', birthDate: '1986-04-01' },
+  { id: 'pat-19', name: 'Valentina Dias', phone: '(21) 90000-0019', birthDate: '2017-09-17' },
+  { id: 'pat-20', name: 'Wagner Pinto', phone: '(21) 90000-0020', birthDate: '1952-06-25' },
+];
+
+export const appointments: Appointment[] = [
+  { id: 'apt-1', patientId: 'pat-1', professionalId: 'pro-1', startsAt: '2026-11-16T11:00:00.000Z', durationMinutes: 30, status: 'scheduled', createdAt: '2026-11-10T12:00:00.000Z' },
+  { id: 'apt-2', patientId: 'pat-3', professionalId: 'pro-2', startsAt: '2026-11-16T12:20:00.000Z', durationMinutes: 20, status: 'scheduled', createdAt: '2026-11-10T12:05:00.000Z' },
+  { id: 'apt-3', patientId: 'pat-4', professionalId: 'pro-1', startsAt: '2026-11-10T11:30:00.000Z', durationMinutes: 30, status: 'completed', createdAt: '2026-11-07T12:00:00.000Z' },
+  { id: 'apt-4', patientId: 'pat-5', professionalId: 'pro-1', startsAt: '2026-11-10T13:00:00.000Z', durationMinutes: 30, status: 'completed', createdAt: '2026-11-06T12:01:00.000Z' },
+  { id: 'apt-5', patientId: 'pat-6', professionalId: 'pro-2', startsAt: '2026-11-10T12:20:00.000Z', durationMinutes: 20, status: 'completed', notes: 'Retorno vacinação', createdAt: '2026-11-05T12:02:00.000Z' },
+  { id: 'apt-6', patientId: 'pat-7', professionalId: 'pro-3', startsAt: '2026-11-10T17:20:00.000Z', durationMinutes: 40, status: 'cancelled', createdAt: '2026-11-04T12:03:00.000Z' },
+  { id: 'apt-7', patientId: 'pat-8', professionalId: 'pro-3', startsAt: '2026-11-10T18:40:00.000Z', durationMinutes: 40, status: 'completed', createdAt: '2026-11-07T12:04:00.000Z' },
+  { id: 'apt-8', patientId: 'pat-9', professionalId: 'pro-1', startsAt: '2026-11-11T12:00:00.000Z', durationMinutes: 30, status: 'completed', createdAt: '2026-11-07T12:05:00.000Z' },
+  { id: 'apt-9', patientId: 'pat-10', professionalId: 'pro-2', startsAt: '2026-11-11T14:00:00.000Z', durationMinutes: 20, status: 'completed', createdAt: '2026-11-06T12:06:00.000Z' },
+  { id: 'apt-10', patientId: 'pat-11', professionalId: 'pro-3', startsAt: '2026-11-11T16:00:00.000Z', durationMinutes: 40, status: 'completed', notes: 'Avaliação de manchas', createdAt: '2026-11-05T12:07:00.000Z' },
+  { id: 'apt-11', patientId: 'pat-2', professionalId: 'pro-1', startsAt: '2026-11-16T12:00:00.000Z', durationMinutes: 30, status: 'scheduled', createdAt: '2026-11-13T12:08:00.000Z' },
+  { id: 'apt-12', patientId: 'pat-12', professionalId: 'pro-1', startsAt: '2026-11-16T13:30:00.000Z', durationMinutes: 30, status: 'scheduled', notes: 'Check-up anual', createdAt: '2026-11-12T12:09:00.000Z' },
+  { id: 'apt-13', patientId: 'pat-13', professionalId: 'pro-1', startsAt: '2026-11-16T17:00:00.000Z', durationMinutes: 30, status: 'cancelled', createdAt: '2026-11-11T12:10:00.000Z' },
+  { id: 'apt-14', patientId: 'pat-14', professionalId: 'pro-2', startsAt: '2026-11-16T13:00:00.000Z', durationMinutes: 20, status: 'scheduled', createdAt: '2026-11-10T12:11:00.000Z' },
+  { id: 'apt-15', patientId: 'pat-15', professionalId: 'pro-3', startsAt: '2026-11-16T16:40:00.000Z', durationMinutes: 40, status: 'scheduled', createdAt: '2026-11-13T12:12:00.000Z' },
+  { id: 'apt-16', patientId: 'pat-16', professionalId: 'pro-3', startsAt: '2026-11-16T19:20:00.000Z', durationMinutes: 40, status: 'scheduled', createdAt: '2026-11-12T12:13:00.000Z' },
+  { id: 'apt-17', patientId: 'pat-17', professionalId: 'pro-1', startsAt: '2026-11-17T11:00:00.000Z', durationMinutes: 30, status: 'scheduled', createdAt: '2026-11-12T12:14:00.000Z' },
+  { id: 'apt-18', patientId: 'pat-18', professionalId: 'pro-1', startsAt: '2026-11-17T14:30:00.000Z', durationMinutes: 30, status: 'scheduled', createdAt: '2026-11-11T12:15:00.000Z' },
+  { id: 'apt-19', patientId: 'pat-1', professionalId: 'pro-1', startsAt: '2026-11-17T18:00:00.000Z', durationMinutes: 30, status: 'scheduled', notes: 'Trazer exames de sangue', createdAt: '2026-11-14T12:16:00.000Z' },
+  { id: 'apt-20', patientId: 'pat-19', professionalId: 'pro-2', startsAt: '2026-11-17T12:00:00.000Z', durationMinutes: 20, status: 'scheduled', createdAt: '2026-11-13T12:17:00.000Z' },
+  { id: 'apt-21', patientId: 'pat-20', professionalId: 'pro-2', startsAt: '2026-11-17T16:40:00.000Z', durationMinutes: 20, status: 'scheduled', createdAt: '2026-11-12T12:18:00.000Z' },
+  { id: 'apt-22', patientId: 'pat-4', professionalId: 'pro-3', startsAt: '2026-11-17T17:20:00.000Z', durationMinutes: 40, status: 'scheduled', createdAt: '2026-11-11T12:19:00.000Z' },
+  { id: 'apt-23', patientId: 'pat-5', professionalId: 'pro-3', startsAt: '2026-11-17T20:00:00.000Z', durationMinutes: 40, status: 'cancelled', createdAt: '2026-11-14T12:20:00.000Z' },
+  { id: 'apt-24', patientId: 'pat-6', professionalId: 'pro-1', startsAt: '2026-11-18T11:30:00.000Z', durationMinutes: 30, status: 'scheduled', createdAt: '2026-11-14T12:21:00.000Z' },
+  { id: 'apt-25', patientId: 'pat-7', professionalId: 'pro-1', startsAt: '2026-11-18T16:00:00.000Z', durationMinutes: 30, status: 'scheduled', createdAt: '2026-11-13T12:22:00.000Z' },
+  { id: 'apt-26', patientId: 'pat-8', professionalId: 'pro-1', startsAt: '2026-11-18T19:30:00.000Z', durationMinutes: 30, status: 'scheduled', createdAt: '2026-11-12T12:23:00.000Z' },
+  { id: 'apt-27', patientId: 'pat-3', professionalId: 'pro-2', startsAt: '2026-11-18T13:40:00.000Z', durationMinutes: 20, status: 'scheduled', notes: 'Retorno', createdAt: '2026-11-15T12:24:00.000Z' },
+  { id: 'apt-28', patientId: 'pat-9', professionalId: 'pro-3', startsAt: '2026-11-18T16:00:00.000Z', durationMinutes: 40, status: 'scheduled', createdAt: '2026-11-14T12:25:00.000Z' },
+  { id: 'apt-29', patientId: 'pat-10', professionalId: 'pro-3', startsAt: '2026-11-18T18:00:00.000Z', durationMinutes: 40, status: 'scheduled', createdAt: '2026-11-13T12:26:00.000Z' },
+  { id: 'apt-30', patientId: 'pat-11', professionalId: 'pro-1', startsAt: '2026-11-19T12:30:00.000Z', durationMinutes: 30, status: 'scheduled', createdAt: '2026-11-13T12:27:00.000Z' },
+  { id: 'apt-31', patientId: 'pat-12', professionalId: 'pro-1', startsAt: '2026-11-19T17:30:00.000Z', durationMinutes: 30, status: 'scheduled', createdAt: '2026-11-16T12:28:00.000Z' },
+  { id: 'apt-32', patientId: 'pat-13', professionalId: 'pro-2', startsAt: '2026-11-19T12:40:00.000Z', durationMinutes: 20, status: 'scheduled', createdAt: '2026-11-15T12:29:00.000Z' },
+  { id: 'apt-33', patientId: 'pat-14', professionalId: 'pro-2', startsAt: '2026-11-19T17:20:00.000Z', durationMinutes: 20, status: 'scheduled', createdAt: '2026-11-14T12:30:00.000Z' },
+  { id: 'apt-34', patientId: 'pat-15', professionalId: 'pro-3', startsAt: '2026-11-19T18:40:00.000Z', durationMinutes: 40, status: 'scheduled', createdAt: '2026-11-13T12:31:00.000Z' },
+  { id: 'apt-35', patientId: 'pat-16', professionalId: 'pro-3', startsAt: '2026-11-19T21:20:00.000Z', durationMinutes: 40, status: 'scheduled', createdAt: '2026-11-16T12:32:00.000Z' },
+  { id: 'apt-36', patientId: 'pat-17', professionalId: 'pro-1', startsAt: '2026-11-20T13:00:00.000Z', durationMinutes: 30, status: 'scheduled', createdAt: '2026-11-16T12:33:00.000Z' },
+  { id: 'apt-37', patientId: 'pat-18', professionalId: 'pro-1', startsAt: '2026-11-20T18:30:00.000Z', durationMinutes: 30, status: 'scheduled', createdAt: '2026-11-15T12:34:00.000Z' },
+  { id: 'apt-38', patientId: 'pat-19', professionalId: 'pro-2', startsAt: '2026-11-20T15:00:00.000Z', durationMinutes: 20, status: 'scheduled', createdAt: '2026-11-14T12:35:00.000Z' },
+  { id: 'apt-39', patientId: 'pat-20', professionalId: 'pro-3', startsAt: '2026-11-20T17:20:00.000Z', durationMinutes: 40, status: 'scheduled', createdAt: '2026-11-17T12:36:00.000Z' },
+  { id: 'apt-40', patientId: 'pat-2', professionalId: 'pro-3', startsAt: '2026-11-20T20:40:00.000Z', durationMinutes: 40, status: 'scheduled', createdAt: '2026-11-16T12:37:00.000Z' },
+];
