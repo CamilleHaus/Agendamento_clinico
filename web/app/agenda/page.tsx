@@ -1,13 +1,9 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
+import { connection } from 'next/server';
 import { apiGet } from '@/lib/api';
 import { STATUS_LABEL, type Appointment, type Patient, type Professional } from '@/lib/types';
-
-function today() {
-  const d = new Date();
-  const pad = (n: number) => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-}
+import { clinicDateISO, formatClinicTime } from '@/lib/clinic-time';
 
 function shiftDate(date: string, days: number) {
   const d = new Date(`${date}T12:00:00Z`);
@@ -15,13 +11,11 @@ function shiftDate(date: string, days: number) {
   return d.toISOString().slice(0, 10);
 }
 
-function formatTime(iso: string) {
-  return new Date(iso).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-}
-
 async function Agenda({ searchParams }: { searchParams: PageProps<'/agenda'>['searchParams'] }) {
   const { date: raw } = await searchParams;
-  const date = typeof raw === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(raw) ? raw : today();
+  // `clinicDateISO()` reads the current instant, which must not be baked into a prerender.
+  if (typeof raw !== 'string') await connection();
+  const date = typeof raw === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(raw) ? raw : clinicDateISO();
 
   const [professionals, appointments, patients] = await Promise.all([
     apiGet<Professional[]>('/professionals'),
@@ -56,7 +50,7 @@ async function Agenda({ searchParams }: { searchParams: PageProps<'/agenda'>['se
                 <ul className="appointments">
                   {items.map((a) => (
                     <li key={a.id} className={`status-${a.status}`}>
-                      <span className="time">{formatTime(a.startsAt)}</span>
+                      <span className="time">{formatClinicTime(a.startsAt)}</span>
                       <span>{patientName.get(a.patientId) ?? a.patientId}</span>
                       <span className="badge">{STATUS_LABEL[a.status]}</span>
                     </li>

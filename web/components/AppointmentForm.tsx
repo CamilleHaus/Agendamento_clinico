@@ -2,7 +2,8 @@
 
 import { useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
-import { apiPost } from '@/lib/api';
+import { ApiError, apiPost } from '@/lib/api';
+import { clinicDateTimeToUTC } from '@/lib/clinic-time';
 import type { Appointment, Patient, Professional } from '@/lib/types';
 
 interface Props {
@@ -18,7 +19,7 @@ export default function AppointmentForm({ patients, professionals }: Props) {
   const [time, setTime] = useState('');
   const [durationMinutes, setDurationMinutes] = useState(30);
   const [notes, setNotes] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
 
   function onProfessionalChange(id: string) {
@@ -29,19 +30,22 @@ export default function AppointmentForm({ patients, professionals }: Props) {
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setError(null);
+    setErrors([]);
     setSaving(true);
     try {
       await apiPost<Appointment>('/appointments', {
         patientId,
         professionalId,
-        startsAt: new Date(`${date}T${time}`).toISOString(),
+        // `date` and `time` are the wall-clock values typed by the user, always in
+        // Brasília time regardless of the browser's own timezone.
+        startsAt: clinicDateTimeToUTC(date, time).toISOString(),
         durationMinutes,
         ...(notes.trim() ? { notes: notes.trim() } : {}),
       });
       router.push(`/agenda?date=${date}`);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro ao salvar');
+      if (err instanceof ApiError) setErrors(err.messages);
+      else setErrors([err instanceof Error ? err.message : 'Erro ao salvar']);
       setSaving(false);
     }
   }
@@ -99,7 +103,18 @@ export default function AppointmentForm({ patients, professionals }: Props) {
         <textarea rows={3} value={notes} onChange={(e) => setNotes(e.target.value)} />
       </label>
 
-      {error && <p className="error">{error}</p>}
+      {errors.length === 1 && (
+        <p className="error" role="alert">
+          {errors[0]}
+        </p>
+      )}
+      {errors.length > 1 && (
+        <ul className="error" role="alert">
+          {errors.map((message, i) => (
+            <li key={i}>{message}</li>
+          ))}
+        </ul>
+      )}
 
       <button type="submit" disabled={saving}>
         {saving ? 'Salvando…' : 'Agendar'}
