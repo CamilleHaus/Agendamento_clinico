@@ -10,9 +10,13 @@ export class ProfessionalsService {
     return this.items;
   }
 
+  findById(id: string): Professional | undefined {
+    return this.items.find((p) => p.id === id);
+  }
+
   findOne(id: string) {
-    const found = this.items.find((p) => p.id === id);
-    if (!found) throw new NotFoundException(`Professional ${id} not found`);
+    const found = this.findById(id);
+    if (!found) throw new NotFoundException('Profissional não encontrado.');
     return found;
   }
 }

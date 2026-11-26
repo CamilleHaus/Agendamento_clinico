@@ -202,3 +202,7 @@ th {
   background: #fde8e8;
   color: #9b1c1c;
 }
+
+ul.error {
+  padding-left: 30px;
+}

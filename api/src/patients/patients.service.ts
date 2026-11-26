@@ -15,9 +15,13 @@ export class PatientsService {
       .sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
   }
 
+  findById(id: string): Patient | undefined {
+    return this.items.find((p) => p.id === id);
+  }
+
   findOne(id: string) {
-    const found = this.items.find((p) => p.id === id);
-    if (!found) throw new NotFoundException(`Patient ${id} not found`);
+    const found = this.findById(id);
+    if (!found) throw new NotFoundException('Paciente não encontrado.');
     return found;
   }
 
